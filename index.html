@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Your Title</title>
+        <link rel="stylesheet" href="flex.css"/>
+        <style>
+            .calendar-container {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: flex-start;
+                width: 800px;
+                align-items: center;
+                gap: 5px;
+            }
+            .calendar-item {
+                flex-basis: calc((100% - 40px) / 7); /* Subtract the total margin width from the container width */
+                display: flex;
+                flex-flow: row wrap;
+                flex-wrap: nowrap;
+                justify-content: space-between;
+                aspect-ratio: 187/57;
+            }
+            .cal-header {
+                display: inline-block;
+                margin: auto;
+            }
+            .other-month {
+                background-color: #b3b3b3;
+            }
+            .current-month {
+                background-color: black;
+            }
+            .number {
+                padding-left: 5px;
+                padding-right: 5px;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                background-color: black;
+                aspect-ratio: 1/1;
+            }
+            .day {
+                flex-grow: 1;
+                background-image: url("images/sun-svgrepo-com.svg");
+                background-size: auto 70%; 
+                background-position: right 5px bottom 50%;
+                background-repeat: no-repeat;
+            }
+            .night {
+                flex-grow: 1;
+                background-image: url("images/moon-svgrepo-com.svg");
+                background-size: auto 70%; 
+                background-position: right 5px bottom 50%;
+                background-repeat: no-repeat;
+            }
+            .yellow {
+                background-color: #fbb03b;
+            }    
+            .red {
+                background-color: #c0272c;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="calendar-container">
+        <div class="calendar-item"><div class="cal-header">Lunes</div></div>
+        <div class="calendar-item"><div class="cal-header">Martes</div></div>
+        <div class="calendar-item"><div class="cal-header">Miércoles</div></div>
+        <div class="calendar-item"><div class="cal-header">Jueves</div></div>
+        <div class="calendar-item"><div class="cal-header">Viernes</div></div>
+        <div class="calendar-item"><div class="cal-header">Sábado</div></div>
+        <div class="calendar-item"><div class="cal-header">Domingo</div></div>
+        <!--start calendar-->
+        <div class="calendar-item other-month"><div class="number">25</div></div>
+        <div class="calendar-item other-month"><div class="number">26</div></div>
+        <div class="calendar-item other-month"><div class="number">27</div></div>
+        <div class="calendar-item other-month"><div class="number">28</div></div>
+        <div class="calendar-item other-month"><div class="number">29</div></div>
+        <div class="calendar-item yellow">
+            <div class="number">1</div>
+            <div class="day"></div>
+        </div>
+        <div class="calendar-item yellow">
+            <div class="number">2</div>
+            <div class="night"></div>
+        </div>
+        <!--new row-->
+        <div class="calendar-item current-month"><div class="number">3</div></div>
+        <div class="calendar-item current-month"><div class="number">4</div></div>
+        <div class="calendar-item current-month"><div class="number">5</div></div>
+        <div class="calendar-item current-month"><div class="number">6</div></div>
+        <div class="calendar-item current-month"><div class="number">7</div></div>
+        <div class="calendar-item red">
+            <div class="number">8</div>
+            <div class="night"></div>
+        </div>
+        <div class="calendar-item red">
+            <div class="number">9</div>
+            <div class="night"></div>
+        </div>
+        <!--new row-->
+        <div class="calendar-item current-month"><div class="number">10</div></div>
+        <div class="calendar-item current-month"><div class="number">11</div></div>
+        <div class="calendar-item current-month"><div class="number">12</div></div>
+        <div class="calendar-item current-month"><div class="number">13</div></div>
+        <div class="calendar-item current-month"><div class="number">14</div></div>
+        <div class="calendar-item yellow">
+            <div class="number">15</div>
+            <div class="day"></div>
+        </div>
+        <div class="calendar-item current-month"><div class="number">16</div></div>
+        <!--new row-->
+        <div class="calendar-item red">
+            <div class="number">17</div>
+            <div class="night"></div>
+        </div>
+        <div class="calendar-item current-month"><div class="number">18</div></div>
+        <div class="calendar-item red">
+            <div class="number">19</div>
+            <div class="day"></div>
+        </div>
+        <div class="calendar-item current-month"><div class="number">20</div></div>
+        <div class="calendar-item current-month"><div class="number">21</div></div>
+        <div class="calendar-item current-month"><div class="number">22</div></div>
+        <div class="calendar-item red">
+            <div class="number">23</div>
+            <div class="night"></div>
+        </div>
+        <!--new row-->
+        <div class="calendar-item yellow">
+            <div class="number">24</div>
+            <div class="day"></div>
+        </div>
+        <div class="calendar-item current-month"><div class="number">25</div></div>
+        <div class="calendar-item current-month"><div class="number">26</div></div>
+        <div class="calendar-item current-month"><div class="number">27</div></div>
+        <div class="calendar-item current-month"><div class="number">28</div></div>
+        <div class="calendar-item current-month"><div class="number">29</div></div>
+        <div class="calendar-item current-month"><div class="number">30</div></div>
+        <!--new row-->
+        <div class="calendar-item current-month"><div class="number">31</div></div>
+        </div>
+    </body>
+</html>
