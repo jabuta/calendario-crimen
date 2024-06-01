@@ -57,5 +57,20 @@ for week in cal:
 # End of the calendar HTML
 html += '</div>'
 
-print(html)
+print(html + "\n")
 
+# Start of the table HTML
+html = '<table><thead><tr><th style="background-color: black; color: white;">Fecha</th><th style="background-color: black; color: white;">Delito</th><th style="background-color: black; color: white;">Horario más habitual</th></tr></thead><tbody>'
+
+# Add rows to the table
+for item in data:
+    html += '<tr>'
+    html += f'<td>{item["FECHA"]}</td>'
+    html += f'<td class="{item["Color"]}"style="; color: white;">{item["DELITO"]}</td>'
+    html += f'<td>{"Día" if item["HORARIO"] == "day" else "Noche"}</td>'
+    html += '</tr>'
+
+# End of the table HTML
+html += '</tbody></table>'
+
+print(html)
