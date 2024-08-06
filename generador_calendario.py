@@ -4,7 +4,7 @@ import datetime
 # Get current year and month
 now = datetime.datetime.now()
 year = now.year
-month = 6
+month = 8
 
 # Create a calendar
 cal = calendar.monthcalendar(year, month)
@@ -14,20 +14,20 @@ days = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Doming
 
 # Your data
 data = [
+    {'FECHA': 4, 'DELITO': 'Homicidios', 'HORARIO': 'night', 'Color': 'red'},
     {'FECHA': 6, 'DELITO': 'Delitos Sexuales', 'HORARIO': 'day', 'Color': 'red'},
-    {'FECHA': 8, 'DELITO': 'Delitos Informáticos', 'HORARIO': 'day', 'Color': 'yellow'},
-    {'FECHA': 12, 'DELITO': 'Hurto de Motos', 'HORARIO': 'day', 'Color': 'yellow'},
-    {'FECHA': 13, 'DELITO': 'Hurto Bicicletas', 'HORARIO': 'day', 'Color': 'yellow'},
-    {'FECHA': 14, 'DELITO': 'Violencia Intrafamiliar', 'HORARIO': 'night', 'Color': 'red'},
+    {'FECHA': 7, 'DELITO': 'Violencia Intrafamiliar', 'HORARIO': 'night', 'Color': 'red'},
+    {'FECHA': 11, 'DELITO': 'Lesiones personales', 'HORARIO': 'night', 'Color': 'red'},
+    {'FECHA': 13, 'DELITO': 'Hurto a Residencias', 'HORARIO': 'day', 'Color': 'yellow'},
     {'FECHA': 15, 'DELITO': 'Extorsión', 'HORARIO': 'day', 'Color': 'red'},
-    {'FECHA': 19, 'DELITO': 'Lesiones personales', 'HORARIO': 'night', 'Color': 'red'},
-    {'FECHA': 20, 'DELITO': 'Hurto a Residencias', 'HORARIO': 'day', 'Color': 'yellow'},
-    {'FECHA': 21, 'DELITO': 'Homicidios', 'HORARIO': 'night', 'Color': 'red'},
-    {'FECHA': 26, 'DELITO': 'Hurto celulares', 'HORARIO': 'night', 'Color': 'yellow'},
-    {'FECHA': 27, 'DELITO': 'Hurto personas', 'HORARIO': 'day', 'Color': 'yellow'},
-    {'FECHA': 28, 'DELITO': 'Feminicidios', 'HORARIO': 'night', 'Color': 'red'},
+    {'FECHA': 20, 'DELITO': 'Hurto Bicicletas', 'HORARIO': 'day', 'Color': 'yellow'},
+    {'FECHA': 24, 'DELITO': 'Hurto celulares', 'HORARIO': 'night', 'Color': 'yellow'},
+    {'FECHA': 25, 'DELITO': 'Feminicidios', 'HORARIO': 'night', 'Color': 'red'},
+    {'FECHA': 27, 'DELITO': 'Amenazas', 'HORARIO': 'day', 'Color': 'yellow'},
+    {'FECHA': 28, 'DELITO': 'Hurto de Motos', 'HORARIO': 'day', 'Color': 'yellow'},
+    {'FECHA': 29, 'DELITO': 'Delitos Informáticos', 'HORARIO': 'day', 'Color': 'yellow'},
+    {'FECHA': 30, 'DELITO': 'Hurto personas', 'HORARIO': 'day', 'Color': 'yellow'},
 ]
-
 
 
 # Convert the data to a dictionary for easier access
