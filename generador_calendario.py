@@ -1,10 +1,40 @@
+import pandas as pd
 import calendar
 import datetime
+from collections import defaultdict
 
-# Get current year and month
+# Read data from Excel file
+df = pd.read_excel('data.xlsx')  # Replace 'data.xlsx' with your Excel file name
+
+# Map 'HORARIO' to 'day' or 'night'
+def map_horario(horario):
+    if horario.lower() == 'noche':
+        return 'night'
+    else:
+        return 'day'
+
+df['HORARIO'] = df['HORARIO'].apply(map_horario)
+
+# Ensure 'FECHA' is an integer
+df['FECHA'] = df['FECHA'].astype(int)
+
+# Convert the DataFrame to a list of dictionaries
+data = df.to_dict(orient='records')
+
+# Get current year
 now = datetime.datetime.now()
 year = now.year
-month = 8
+
+# Ask the user for the month
+while True:
+    try:
+        month = int(input("Please enter the month number (1-12): "))
+        if 1 <= month <= 12:
+            break
+        else:
+            print("Please enter a valid month number between 1 and 12.")
+    except ValueError:
+        print("Invalid input. Please enter a number between 1 and 12.")
 
 # Create a calendar
 cal = calendar.monthcalendar(year, month)
@@ -12,26 +42,11 @@ cal = calendar.monthcalendar(year, month)
 # Days of the week in Spanish
 days = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
 
-# Your data
-data = [
-    {'FECHA': 4, 'DELITO': 'Homicidios', 'HORARIO': 'night', 'Color': 'red'},
-    {'FECHA': 6, 'DELITO': 'Delitos Sexuales', 'HORARIO': 'day', 'Color': 'red'},
-    {'FECHA': 7, 'DELITO': 'Violencia Intrafamiliar', 'HORARIO': 'night', 'Color': 'red'},
-    {'FECHA': 11, 'DELITO': 'Lesiones personales', 'HORARIO': 'night', 'Color': 'red'},
-    {'FECHA': 13, 'DELITO': 'Hurto a Residencias', 'HORARIO': 'day', 'Color': 'yellow'},
-    {'FECHA': 15, 'DELITO': 'Extorsión', 'HORARIO': 'day', 'Color': 'red'},
-    {'FECHA': 20, 'DELITO': 'Hurto Bicicletas', 'HORARIO': 'day', 'Color': 'yellow'},
-    {'FECHA': 24, 'DELITO': 'Hurto celulares', 'HORARIO': 'night', 'Color': 'yellow'},
-    {'FECHA': 25, 'DELITO': 'Feminicidios', 'HORARIO': 'night', 'Color': 'red'},
-    {'FECHA': 27, 'DELITO': 'Amenazas', 'HORARIO': 'day', 'Color': 'yellow'},
-    {'FECHA': 28, 'DELITO': 'Hurto de Motos', 'HORARIO': 'day', 'Color': 'yellow'},
-    {'FECHA': 29, 'DELITO': 'Delitos Informáticos', 'HORARIO': 'day', 'Color': 'yellow'},
-    {'FECHA': 30, 'DELITO': 'Hurto personas', 'HORARIO': 'day', 'Color': 'yellow'},
-]
-
-
-# Convert the data to a dictionary for easier access
-data_dict = {item['FECHA']: item for item in data}
+# Convert the data to a dictionary with 'FECHA' as key
+# Since there may be multiple items on the same date, we store a list of items for each date
+data_dict = defaultdict(list)
+for item in data:
+    data_dict[item['FECHA']].append(item)
 
 # Start of the calendar HTML
 html = '<div class="calendar-container">'
@@ -46,11 +61,23 @@ for week in cal:
         if day == 0:
             html += '<div class="calendar-item other-month"><div class="number"></div></div>'
         elif day in data_dict:
-            item = data_dict[day]
-            html += f'<div class="calendar-item {item["Color"]} tooltip">'
+            # Handle multiple events on the same day
+            items = data_dict[day]
+            # Determine the color (red if any item is red)
+            colors = set(item['Color'] for item in items)
+            color_class = 'red' if 'red' in colors else 'yellow'
+            # Determine the horarios
+            horarios = set(item['HORARIO'] for item in items)
+            # Build the HTML
+            html += f'<div class="calendar-item {color_class} tooltip">'
             html += f'<div class="number">{day}</div>'
-            html += f'<div class="{item["HORARIO"].lower()}"></div>'
-            html += f'<span class="tooltiptext">{item["DELITO"]}</span>'
+            if 'day' in horarios:
+                html += '<div class="day"></div>'
+            if 'night' in horarios:
+                html += '<div class="night"></div>'
+            # Concatenate 'DELITO's for tooltip
+            delitos = ', '.join(item['DELITO'] for item in items)
+            html += f'<span class="tooltiptext">{delitos}</span>'
             html += '</div>'
         else:
             html += f'<div class="calendar-item current-month"><div class="number">{day}</div></div>'
@@ -67,7 +94,7 @@ html = '<table><thead><tr><th style="background-color: black; color: white;">Fec
 for item in data:
     html += '<tr>'
     html += f'<td>{item["FECHA"]}</td>'
-    html += f'<td class="{item["Color"]}"style="color: white;">{item["DELITO"]}</td>'
+    html += f'<td class="{item["Color"]}" style="color: white;">{item["DELITO"]}</td>'
     html += f'<td>{"Día" if item["HORARIO"] == "day" else "Noche"}</td>'
     html += '</tr>'
 
