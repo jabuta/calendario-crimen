@@ -23,7 +23,22 @@ data = df.to_dict(orient='records')
 
 # Get current year
 now = datetime.datetime.now()
-year = now.year
+default_year = now.year
+
+# Get year input from user with validation
+while True:
+    try:
+        year_input = input(f"Enter year (press Enter for current year {default_year}): ").strip()
+        if year_input == "":
+            year = default_year
+        else:
+            year = int(year_input)
+            if year < 1900 or year > 2100:
+                print("Please enter a year between 1900 and 2100")
+                continue
+        break
+    except ValueError:
+        print("Please enter a valid year number")
 
 # Ask the user for the month
 while True:
